@@ -1,0 +1,1 @@
+# consul-plugins-hue
