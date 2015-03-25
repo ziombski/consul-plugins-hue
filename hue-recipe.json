@@ -1,9 +1,8 @@
 {
-  "name": "hue-recipe",
-  "description": "sets up Apache HUE on an Ambari cluster",
-  "properties": {
-  },
-  "plugins": [
-    "https://github.com/ziombski/consul-plugins-hue.git"
-  ]
+    "name": "hue-recipe",
+    "description": "sets up Apache HUE on an Ambari cluster",
+    "properties": {},
+    "plugins": {
+        "https://github.com/ziombski/consul-plugins-hue.git":"ALL_NODES"
+    }
 }
