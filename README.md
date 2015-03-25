@@ -20,14 +20,9 @@ Alternatively you can use the `--url` parameter to create the Spark recipe.
 recipe add --url https://raw.githubusercontent.com/ziombski/consul-plugins-hue/master/hue-recipe.json
 ```
 
-For using your recipe you have to select it. (you can check your recipes with `recipe list` command)
+For using your recipe you have to point it when configuring instancegroup. (you can check your recipes with `recipe list` command)
 ```
-recipe select --id RECIPE_ID
-```
-In case of your blueprint and credential have already been selected and the instance groups are configured (`instancegroup configure`), create your stack with `create stack` command. If your stack is ready, you are able to create your cluster:
-
-```
-cluster create --description "Cloudbreak provisoned cluster with Apache HUE"
+instancegroup configure --hostgroup NAME --nodecount COUNT --templateName TMPL_NAME --recipeIds RECIPE_ID
 ```
 
 Please put these configurations in your blueprints:
