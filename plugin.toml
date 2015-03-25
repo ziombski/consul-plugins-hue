@@ -1,0 +1,11 @@
+[plugin]
+name = "hue"
+description = "Install Apache HUE to HDP cluster"
+version = "1.0"
+maintainer_name = "Marcin Ziombski"
+maintainer_email = "no-email"
+website_url = "http://github.com/ziombski/consul-plugins-hue"
+
+[plugin.config]
+
+[plugin.compatibility]
