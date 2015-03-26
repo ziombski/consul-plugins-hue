@@ -7,12 +7,12 @@
 
 
 install-hue() {
-  yum -y install ant asciidoc cyrus-sasl-devel cyrus-sasl-gssapi gcc gcc-c++ krb5-devel libtidy libxml2-devel libxslt-devel mysql mysql-devel openldap-devel python-devel sqlite-devel wget sudo make
+  yum -y install ant asciidoc cyrus-sasl-devel cyrus-sasl-gssapi gcc gcc-c++ krb5-devel libtidy libxml2-devel libxslt-devel mysql mysql-devel openldap-devel python-devel sqlite-devel wget sudo
   wget https://dl.dropboxusercontent.com/u/730827/hue/releases/$HUE_VERSION/hue-$HUE_VERSION.tgz
   echo "JAVA_HOME=$JAVA_HOME" >> /etc/environment 
   tar -xzf hue-$HUE_VERSION.tgz
   cd hue-$HUE_VERSION
-  make install -s
+  make install -n
 }
 
 main(){
