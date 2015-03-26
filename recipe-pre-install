@@ -34,11 +34,6 @@ install-hue() {
   sed -i "s/secret_key=/secret_key=${RAND_TEXT}/g" ${HUE_INI}  
   
   cd /usr/local/hue/build/env/bin
-  
-  sudo -u hdfs hdfs dfs -mkdir /user/hue
-  sudo -u hdfs hdfs dfs -chown hue:hue /user/hue
-  
-  sudo -u hue ./supervisor -d
 }
 
 main(){
