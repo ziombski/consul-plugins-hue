@@ -1,3 +1,5 @@
+#!/bin/bash
+
 : ${LOGFILE:=/tmp/install_hue.log}
 : ${DEBUG:=1}
 
@@ -32,8 +34,6 @@ install-hue() {
   sed -i "s/## app_blacklist=/app_blacklist=impala,security,spark,hbase/g" ${HUE_INI}
   
   sed -i "s/secret_key=/secret_key=${RAND_TEXT}/g" ${HUE_INI}  
-  
-  cd /usr/local/hue/build/env/bin
 }
 
 main(){
