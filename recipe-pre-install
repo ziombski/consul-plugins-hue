@@ -12,7 +12,9 @@ install-hue() {
   echo "JAVA_HOME=$JAVA_HOME" >> /etc/environment 
   tar -xzf hue-$HUE_VERSION.tgz
   cd hue-$HUE_VERSION
+  date > logDate
   make install | tee logOutput
+  date >> logDate
 }
 
 main(){
