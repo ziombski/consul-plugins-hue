@@ -19,25 +19,17 @@ install-hue() {
   tar -xzf hue-$HUE_VERSION.tgz
   cd hue-$HUE_VERSION
   date > logDate
-  wget http://students.mimuw.edu.pl/~mz292739/makeSplit1
-  chmod +x ./makeSplit1
+  make install
+  echo "po make install" >> logDate
   date >> logDate
   sleep 10
-  echo "po sleep 10"
+  echo "po sleep 10" >> logDate
   date >> logDate
   sleep 55
-  echo "po sleep 55"
+  echo "po sleep 55" >> logDate
   date >> logDate
   sleep 70
-  echo "po sleep 70"
-  date >> logDate
-  ./makeSplit1
-  date >> logDate
-  echo '--- Building egg for Babel-0.9.6'
-  cd ext-py/Babel-0.9.6 && /tmp/hue-3.7.1/build/env/bin/python2.6 \
-	      -c '__import__("setuptools.sandbox").sandbox.run_setup("setup.py", __import__("sys").argv[1:])' \
-	      bdist_egg
-  mkdir -p /tmp/hue-3.7.1/desktop/core/build/Babel-0.9.6 && touch /tmp/hue-3.7.1/desktop/core/build/Babel-0.9.6/egg.stamp
+  echo "po sleep 70" >> logDate
   date >> logDate
 }
 
