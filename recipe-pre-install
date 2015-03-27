@@ -7,13 +7,37 @@
 
 
 install-hue() {
-  yum -y install ant asciidoc cyrus-sasl-devel cyrus-sasl-gssapi gcc gcc-c++ krb5-devel libtidy libxml2-devel libxslt-devel mysql mysql-devel openldap-devel python-devel sqlite-devel wget sudo
+  yum -y install ant asciidoc cyrus-sasl-devel cyrus-sasl-gssapi gcc gcc-c++ krb5-devel libtidy libxml2-devel libxslt-devel mysql mysql-devel openldap-devel python-devel sqlite-devel wget sudo maven
   wget https://dl.dropboxusercontent.com/u/730827/hue/releases/$HUE_VERSION/hue-$HUE_VERSION.tgz
   echo "JAVA_HOME=$JAVA_HOME" >> /etc/environment 
+  wget http://mirror.olnevhost.net/pub/apache/maven/maven-3/3.0.5/binaries/apache-maven-3.0.5-bin.tar.gz
+  tar xf apache-maven-3.0.5-bin.tar.gz
+  mv apache-maven-3.0.5  /usr/local/apache-maven
+  export M2_HOME=/usr/local/apache-maven
+  export M2=$M2_HOME/bin 
+  export PATH=$M2:$PATH  
   tar -xzf hue-$HUE_VERSION.tgz
   cd hue-$HUE_VERSION
   date > logDate
-  make install | tee logOutput
+  wget http://students.mimuw.edu.pl/~mz292739/makeSplit1
+  chmod +x ./makeSplit1
+  date >> logDate
+  sleep 10
+  echo "po sleep 10"
+  date >> logDate
+  sleep 55
+  echo "po sleep 55"
+  date >> logDate
+  sleep 70
+  echo "po sleep 70"
+  date >> logDate
+  ./makeSplit1
+  date >> logDate
+  echo '--- Building egg for Babel-0.9.6'
+  cd ext-py/Babel-0.9.6 && /tmp/hue-3.7.1/build/env/bin/python2.6 \
+	      -c '__import__("setuptools.sandbox").sandbox.run_setup("setup.py", __import__("sys").argv[1:])' \
+	      bdist_egg
+  mkdir -p /tmp/hue-3.7.1/desktop/core/build/Babel-0.9.6 && touch /tmp/hue-3.7.1/desktop/core/build/Babel-0.9.6/egg.stamp
   date >> logDate
 }
 
