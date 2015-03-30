@@ -36,8 +36,11 @@ install-hue() {
   sed -i "s/secret_key=/secret_key=${RAND_TEXT}/g" ${HUE_INI}
   sudo -u hdfs hdfs dfs -mkdir /user/hue
   sudo -u hdfs hdfs dfs -chown hue:hue /user/hue
+  sudo -u hdfs hadoop fs -mkdir /user/root
+  sudo -u hdfs hadoop fs -chown root:root /user/root 
   sudo chown -R hue:hue /usr/local/hue
   sudo -u hue /usr/local/hue/build/env/bin/supervisor -d 
+  sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 8080 -j REDIRECT --to-port 8888
 }
 
 main(){
