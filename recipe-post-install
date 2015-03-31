@@ -7,7 +7,7 @@
 
 
 install-hue() {
-  yum -y install ant asciidoc cyrus-sasl-devel cyrus-sasl-gssapi gcc gcc-c++ krb5-devel libtidy libxml2-devel libxslt-devel mysql mysql-devel openldap-devel python-devel sqlite-devel wget sudo
+  yum -y install ant asciidoc cyrus-sasl-devel cyrus-sasl-gssapi gcc gcc-c++ krb5-devel libtidy libxml2-devel libxslt-devel mysql mysql-devel openldap-devel python-devel sqlite-devel wget
   echo "JAVA_HOME=$JAVA_HOME" >> /etc/environment 
   wget http://mirror.olnevhost.net/pub/apache/maven/maven-3/3.0.5/binaries/apache-maven-3.0.5-bin.tar.gz
   tar xf apache-maven-3.0.5-bin.tar.gz
@@ -34,13 +34,13 @@ install-hue() {
   sed -i "s/## hive_server_host=localhost/hive_server_host=${NAMENODE}/g" ${HUE_INI}
   sed -i "s/## app_blacklist=/app_blacklist=impala,security,spark,hbase/g" ${HUE_INI}
   sed -i "s/secret_key=/secret_key=${RAND_TEXT}/g" ${HUE_INI}
-  sudo -u hdfs hdfs dfs -mkdir /user/hue
-  sudo -u hdfs hdfs dfs -chown hue:hue /user/hue
-  sudo -u hdfs hadoop fs -mkdir /user/root
-  sudo -u hdfs hadoop fs -chown root:root /user/root 
-  sudo chown -R hue:hue /usr/local/hue
-  sudo -u hue /usr/local/hue/build/env/bin/supervisor -d 
-  sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 8080 -j REDIRECT --to-port 8888
+  hdfs dfs -mkdir /user/hue
+  hdfs dfs -chown hue:hue /user/hue
+  hadoop fs -mkdir /user/root
+  hadoop fs -chown root:root /user/root 
+  chown -R hue:hue /usr/local/hue
+  hue /usr/local/hue/build/env/bin/supervisor -d 
+  iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 8080 -j REDIRECT --to-port 8888
 }
 
 main(){
