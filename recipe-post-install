@@ -2,7 +2,6 @@
 
 : ${LOGFILE:=/tmp/install_hue.log}
 : ${DEBUG:=1}
-
 : ${HUE_VERSION:=3.7.1}
 
 
@@ -15,9 +14,10 @@ install-hue() {
   export M2_HOME=/usr/local/apache-maven
   export M2=$M2_HOME/bin 
   export PATH=$M2:$PATH  
-  wget http://students.mimuw.edu.pl/~mz292739/hue-$HUE_VERSION-bin.tar
-  tar -xzf hue-$HUE_VERSION-bin.tar
-  mv hue /usr/local
+  wget https://dl.dropboxusercontent.com/u/730827/hue/releases/$HUE_VERSION/hue-$HUE_VERSION.tgz
+  tar -xzf hue-$HUE_VERSION.tgz
+  cd hue-$HUE_VERSION
+  make install
   useradd hue
   chown -R hue:hue /usr/local/hue
   NAMENODE=`hdfs getconf -namenodes`
