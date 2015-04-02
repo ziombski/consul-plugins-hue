@@ -14,10 +14,13 @@ install-hue() {
   export M2_HOME=/usr/local/apache-maven
   export M2=$M2_HOME/bin 
   export PATH=$M2:$PATH  
-  wget https://dl.dropboxusercontent.com/u/730827/hue/releases/$HUE_VERSION/hue-$HUE_VERSION.tgz
-  tar -xzf hue-$HUE_VERSION.tgz
-  cd hue-$HUE_VERSION
-  make install
+  #wget https://dl.dropboxusercontent.com/u/730827/hue/releases/$HUE_VERSION/hue-$HUE_VERSION.tgz
+  #tar -xzf hue-$HUE_VERSION.tgz
+  #cd hue-$HUE_VERSION
+  #make install
+  wget http://students.mimuw.edu.pl/~mz292739/hue-$HUE_VERSION-bin.tar
+  tar -xzf hue-$HUE_VERSION-bin.tar
+  mv hue /usr/local
   useradd hue
   chown -R hue:hue /usr/local/hue
   NAMENODE=`hdfs getconf -namenodes`
