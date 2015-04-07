@@ -37,7 +37,8 @@ install-hue() {
   sed -i "s/## hive_server_host=localhost/hive_server_host=${NAMENODE}/g" ${HUE_INI}
   sed -i "s/## app_blacklist=/app_blacklist=impala,security,spark,hbase/g" ${HUE_INI}
   sed -i "s/secret_key=/secret_key=${RAND_TEXT}/g" ${HUE_INI}
-  sed -i "s/http_port=8888/http_port=8080/g" ${HUE_INI}  # cheap hack
+  #sed -i "s/http_port=8888/http_port=8080/g" ${HUE_INI}  # cheap hack
+  #sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 8080 -j REDIRECT --to-port 8888
   HADOOP_USER_NAME=hdfs hdfs dfs -mkdir /user/hue
   HADOOP_USER_NAME=hdfs hdfs dfs -chown hue:hue /user/hue
   HADOOP_USER_NAME=hdfs hdfs dfs -mkdir /user/root
