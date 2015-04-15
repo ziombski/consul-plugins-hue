@@ -44,6 +44,8 @@ install-hue() {
   HADOOP_USER_NAME=hdfs hdfs dfs -chown hue:hue /user/hue
   HADOOP_USER_NAME=hdfs hdfs dfs -mkdir /user/root
   HADOOP_USER_NAME=hdfs hdfs dfs -chown root:root /user/root
+  sync
+  sleep 10
   /usr/local/hue/build/env/bin/supervisor -d 
 }
 
