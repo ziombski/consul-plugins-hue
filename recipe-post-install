@@ -23,8 +23,12 @@ install-hue() {
   mv hue /usr/local
   useradd hue
   chown -R hue:hue /usr/local/hue
+  HADOOP_USER_NAME=hdfs hdfs dfs -mkdir /user/hue
+  HADOOP_USER_NAME=hdfs hdfs dfs -chown hue:hue /user/hue
+  HADOOP_USER_NAME=hdfs hdfs dfs -mkdir /user/root
+  HADOOP_USER_NAME=hdfs hdfs dfs -chown root:root /user/root
   NAMENODE=`hdfs getconf -namenodes`
-  host $NAMENODE
+  echo "NAMENODE=" $NAMENODE >> $LOGFILE
   HUE_INI=/usr/local/hue/desktop/conf/hue.ini
   RAND_TEXT=`tr -dc a-z </dev/urandom | head -c 50`
   sed -i "s/fs_defaultfs=hdfs:\/\/localhost:8020/fs_defaultfs=hdfs:\/\/${NAMENODE}:8020/g" ${HUE_INI}
@@ -40,12 +44,6 @@ install-hue() {
   sed -i "s/secret_key=/secret_key=${RAND_TEXT}/g" ${HUE_INI}
   sed -i "s/http_port=8888/http_port=8080/g" ${HUE_INI}  # cheap hack
   #sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 8080 -j REDIRECT --to-port 8888
-  HADOOP_USER_NAME=hdfs hdfs dfs -mkdir /user/hue
-  HADOOP_USER_NAME=hdfs hdfs dfs -chown hue:hue /user/hue
-  HADOOP_USER_NAME=hdfs hdfs dfs -mkdir /user/root
-  HADOOP_USER_NAME=hdfs hdfs dfs -chown root:root /user/root
-  sync
-  sleep 10
   /usr/local/hue/build/env/bin/supervisor -d 
 }
 
