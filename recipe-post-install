@@ -24,6 +24,7 @@ install-hue() {
   useradd hue
   chown -R hue:hue /usr/local/hue
   NAMENODE=`hdfs getconf -namenodes`
+  host $NAMENODE
   HUE_INI=/usr/local/hue/desktop/conf/hue.ini
   RAND_TEXT=`tr -dc a-z </dev/urandom | head -c 50`
   sed -i "s/fs_defaultfs=hdfs:\/\/localhost:8020/fs_defaultfs=hdfs:\/\/${NAMENODE}:8020/g" ${HUE_INI}
