@@ -28,7 +28,7 @@ install-hue() {
   HADOOP_USER_NAME=hdfs hdfs dfs -mkdir /user/root
   HADOOP_USER_NAME=hdfs hdfs dfs -chown root:root /user/root
   NAMENODE=`hdfs getconf -namenodes`
-  echo "NAMENODE=" $NAMENODE >> $LOGFILE
+  echo "NAMENODE=" $NAMENODE > /tmp/namenodeDuringPostRecipe
   HUE_INI=/usr/local/hue/desktop/conf/hue.ini
   RAND_TEXT=`tr -dc a-z </dev/urandom | head -c 50`
   sed -i "s/fs_defaultfs=hdfs:\/\/localhost:8020/fs_defaultfs=hdfs:\/\/${NAMENODE}:8020/g" ${HUE_INI}
